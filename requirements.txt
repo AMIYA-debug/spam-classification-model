@@ -3,4 +3,7 @@ gunicorn
 Werkzeug
 python-dotenv
 pandas
+scikit-learn
+
+
 
