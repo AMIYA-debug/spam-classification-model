@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SpamGuard - Results</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a1450, #1a285a 70%, #253178);
+      color: #f7fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(17, 27, 68, 0.95);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.6);
+      max-width: 800px;
+      width: 100%;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      color: #ffe073;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+    .input-box {
+      background: #182960;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #bee7ff;
+    }
+    .results {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+    .result-card {
+      flex: 1 1 280px;
+      background: #22366e;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+    }
+    .result-card h3 {
+      margin-bottom: 10px;
+      color: #89cbff;
+    }
+    .result-card p {
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+    .comparison {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #111f56;
+    }
+    .comparison h3 {
+      color: #ffd862;
+      margin-bottom: 10px;
+    }
+    .comparison ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    .btn {
+      margin-top: 30px;
+      display: block;
+      text-align: center;
+      background: linear-gradient(90deg, #259dfd, #0050c8);
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #2086f0, #003f9e);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Classification Results</h2>
+
+    <div class="input-box">
+      <b>Message:</b> "{{ message }}"
+    </div>
+
+    <div class="results">
+      <div class="result-card">
+        <h3>BoW Model</h3>
+        <p><b>Prediction:</b> {{ bow_result }}</p>
+        <p><b>Accuracy:</b> {{ bow_accuracy }}%</p>
+      </div>
+      <div class="result-card">
+        <h3>TF-IDF Model</h3>
+        <p><b>Prediction:</b> {{ tfidf_result }}</p>
+        <p><b>Accuracy:</b> {{ tfidf_accuracy }}%</p>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <h3>Model Insights</h3>
+      <p><b>Better Performing Model:</b> {{ better_model }}</p>
+      <ul>
+        <li><b>BoW (Bag of Words):</b> Simple word counts, quick but treats all words equally.</li>
+        <li><b>TF-IDF:</b> Considers word importance, reduces common-word noise, usually better for spam detection.</li>
+        <li>Both ignore word order — they focus only on word occurrence.</li>
+        <li>In practice, TF-IDF outperforms BoW in most text classification tasks.</li>
+      </ul>
+    </div>
+
+    <a href="/" class="btn">🔄 Classify Another Message</a>
+  </div>
+</body>
+</html>
